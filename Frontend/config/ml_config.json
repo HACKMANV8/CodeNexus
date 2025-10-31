@@ -1,0 +1,49 @@
+{
+  "models": {
+    "threat_classifier": {
+      "enabled": true,
+      "model_path": "models/threat_classifier/",
+      "confidence_threshold": 0.85,
+      "retraining_interval_hours": 24,
+      "features": ["request_frequency", "geo_risk", "behavior_pattern", "payload_analysis"]
+    },
+    "behavior_predictor": {
+      "enabled": true,
+      "model_type": "lstm",
+      "sequence_length": 10,
+      "prediction_horizon": 5,
+      "confidence_threshold": 0.75
+    },
+    "url_detector": {
+      "enabled": true,
+      "model_type": "lightgbm",
+      "features_count": 52,
+      "confidence_threshold": 0.90
+    }
+  },
+  "training": {
+    "batch_size": 32,
+    "epochs": 100,
+    "validation_split": 0.2,
+    "early_stopping_patience": 10,
+    "learning_rate": 0.001
+  },
+  "feature_engineering": {
+    "url_features": ["length", "special_chars", "domain_age", "tld_risk"],
+    "network_features": ["packet_size", "protocol", "port", "connection_duration"],
+    "behavioral_features": ["request_pattern", "timing_analysis", "user_agent_analysis"],
+    "temporal_features": ["hour_of_day", "day_of_week", "session_duration"]
+  },
+  "anomaly_detection": {
+    "enabled": true,
+    "algorithm": "isolation_forest",
+    "contamination": 0.1,
+    "threshold": -0.5
+  },
+  "performance": {
+    "model_drift_threshold": 0.05,
+    "accuracy_threshold": 0.85,
+    "retrain_on_drift": true,
+    "monitoring_interval_minutes": 60
+  }
+}

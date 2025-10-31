@@ -1,0 +1,46 @@
+{
+  "app": {
+    "debug": false,
+    "environment": "production"
+  },
+  "server": {
+    "host": "0.0.0.0",
+    "port": 8000,
+    "reload": false,
+    "workers": 8
+  },
+  "database": {
+    "url": "postgresql://honeypot_prod:${DB_PASSWORD}@db-server/honeypot_production",
+    "pool_size": 50,
+    "max_overflow": 100,
+    "echo": false
+  },
+  "redis": {
+    "url": "redis://redis-server:6379",
+    "password": "${REDIS_PASSWORD}",
+    "db": 0
+  },
+  "logging": {
+    "level": "WARNING",
+    "file": "/var/log/honeypot/app.log",
+    "max_size": 1073741824,
+    "backup_count": 10
+  },
+  "honeypots": {
+    "ssh_port": 22,
+    "web_port": 80,
+    "ftp_port": 21,
+    "simulation_mode": false,
+    "max_connections": 5000
+  },
+  "security": {
+    "rate_limiting": {
+      "enabled": true,
+      "requests_per_minute": 1000
+    }
+  },
+  "ml": {
+    "training_enabled": false,
+    "model_cache": "/opt/honeypot/models/"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "app": {
+    "debug": true,
+    "environment": "development"
+  },
+  "server": {
+    "host": "127.0.0.1",
+    "port": 8000,
+    "reload": true
+  },
+  "database": {
+    "url": "postgresql://honeypot_dev:dev_password@localhost/honeypot_dev",
+    "echo": true
+  },
+  "redis": {
+    "url": "redis://localhost:6379"
+  },
+  "logging": {
+    "level": "DEBUG",
+    "file": "logs/development.log"
+  },
+  "honeypots": {
+    "ssh_port": 2222,
+    "web_port": 8080,
+    "ftp_port": 2121,
+    "simulation_mode": true
+  },
+  "ml": {
+    "training_enabled": true,
+    "model_cache": "models/development/"
+  }
+}

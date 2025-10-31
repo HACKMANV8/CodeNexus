@@ -1,0 +1,36 @@
+{
+  "app": {
+    "name": "Honeypot Hunter AI",
+    "version": "1.0.0",
+    "description": "AI-Powered Cyber Threat Detection System"
+  },
+  "server": {
+    "host": "0.0.0.0",
+    "port": 8000,
+    "workers": 4,
+    "reload": true
+  },
+  "database": {
+    "url": "postgresql://honeypot_user:password@localhost/honeypot_ctdr",
+    "pool_size": 20,
+    "max_overflow": 30,
+    "echo": false
+  },
+  "redis": {
+    "url": "redis://localhost:6379",
+    "password": null,
+    "db": 0
+  },
+  "logging": {
+    "level": "INFO",
+    "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    "file": "logs/app.log",
+    "max_size": 10485760,
+    "backup_count": 5
+  },
+  "honeypots": {
+    "enabled": ["ssh", "web", "ftp"],
+    "data_retention_days": 30,
+    "max_connections": 1000
+  }
+}

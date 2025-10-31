@@ -1,0 +1,72 @@
+{
+  "authentication": {
+    "jwt_secret": "${JWT_SECRET_KEY}",
+    "jwt_algorithm": "HS256",
+    "jwt_expiry_minutes": 60,
+    "password_min_length": 12,
+    "password_requirements": {
+      "uppercase": true,
+      "lowercase": true,
+      "numbers": true,
+      "special_chars": true
+    }
+  },
+  "rate_limiting": {
+    "enabled": true,
+    "strategy": "token_bucket",
+    "login_attempts": {
+      "max_attempts": 5,
+      "lockout_minutes": 30
+    },
+    "api_limits": {
+      "general": "1000/minute",
+      "attack_endpoints": "5000/minute",
+      "admin_endpoints": "100/minute"
+    }
+  },
+  "honeypot_security": {
+    "isolation_level": "high",
+    "max_connection_duration": 300,
+    "max_request_size": 10485760,
+    "allowed_ports": [22, 80, 443, 21, 25, 110, 143],
+    "blocked_countries": ["KP", "SY", "IR"],
+    "auto_block": {
+      "enabled": true,
+      "threshold": 10,
+      "duration_minutes": 1440
+    }
+  },
+  "encryption": {
+    "data_encryption": true,
+    "algorithm": "AES-256-GCM",
+    "key_rotation_days": 30
+  },
+  "network_security": {
+    "firewall_rules": {
+      "block_private_ips": false,
+      "allow_localhost": true,
+      "max_connections_per_ip": 100
+    },
+    "ssl": {
+      "enabled": true,
+      "cert_file": "/etc/ssl/certs/honeypot.crt",
+      "key_file": "/etc/ssl/private/honeypot.key"
+    }
+  },
+  "monitoring": {
+    "failed_login_alerts": true,
+    "suspicious_activity_alerts": true,
+    "admin_notification_emails": ["security@company.com"],
+    "alert_thresholds": {
+      "high_risk_score": 80,
+      "multiple_attack_vectors": 3,
+      "rapid_fire_attacks": 10
+    }
+  },
+  "compliance": {
+    "data_retention_days": 90,
+    "log_encryption": true,
+    "access_logging": true,
+    "audit_trail": true
+  }
+}
